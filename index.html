@@ -6,19 +6,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Koti</title>
 
+  <!--
+    On a public hostname with no robots.txt, and there is no reason for it to be
+    in a search index. Note this is not a control on what is disclosed - it is a
+    request a crawler may ignore. What actually keeps a visitor from learning
+    anything is that this shell holds no reading, no location name and no count:
+    everything about the home arrives at runtime, in a payload the endpoint only
+    sends to a signed-in, allowlisted caller. None of it may become a build-time
+    constant. See HOME-017 and config/README.md.
+  -->
+  <meta name="robots" content="noindex, nofollow" />
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
   <!--
     The one third-party script on this page, and the only one there is no npm
-    alternative to. Everything else, including the charting library still to be
-    picked, stays off CDNs; auth is the exception because Google Identity
-    Services is not vendored anywhere.
+    alternative to. It is also the ONLY outbound request a signed-out visitor
+    causes: src/api.ts returns 'signed-out' without a request ever leaving the
+    browser rather than sending a bare header and reading the 401 back.
     src/auth.ts waits on this tag's load, so a blocked CDN becomes a message
     rather than a button that never appears.
   -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <script type="module" crossorigin src="/assets/index-Cb14mN3t.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-DpZ7yMVb.css">
+  <script type="module" crossorigin src="/assets/index-Bd_cmZvV.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-CPzruVTK.css">
 </head>
 
 <body>
@@ -31,7 +42,12 @@
     <section id="payload" hidden></section>
   </main>
 
-  <footer>Milestone 1 &mdash; sign-in and one authenticated call. Readings arrive in milestone 2.</footer>
+  <!--
+    Says nothing about the state of the deployment, the sensors or the data.
+    A visitor who has not signed in should learn only that this page exists and
+    offers a Google sign-in.
+  -->
+  <footer>Private dashboard.</footer>
 
 </body>
 
