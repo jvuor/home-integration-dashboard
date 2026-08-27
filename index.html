@@ -28,8 +28,8 @@
     rather than a button that never appears.
   -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <script type="module" crossorigin src="/assets/index-Bd_cmZvV.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-CPzruVTK.css">
+  <script type="module" crossorigin src="/assets/index-DROLGjVD.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-BB5tl3c5.css">
 </head>
 
 <body>
@@ -38,16 +38,21 @@
   <main>
     <p id="status"></p>
     <div id="signin"></div>
+    <!--
+      Only ever shown after a failure the reader can retry - never in the loaded
+      state, where a refresh control is chrome nobody asked for. It is still what
+      makes an expired token reachable: the token is held in memory, so nothing
+      else would ever send a stale one.
+    -->
     <button id="reload" type="button" hidden></button>
     <section id="payload" hidden></section>
+    <!--
+      Which account the endpoint accepted. Worth having - it is the only
+      trustworthy answer to that question - but not worth leading with, so it
+      sits at the bottom in small muted text.
+    -->
+    <p id="account" hidden></p>
   </main>
-
-  <!--
-    Says nothing about the state of the deployment, the sensors or the data.
-    A visitor who has not signed in should learn only that this page exists and
-    offers a Google sign-in.
-  -->
-  <footer>Private dashboard.</footer>
 
 </body>
 
